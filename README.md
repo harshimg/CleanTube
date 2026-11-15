@@ -23,7 +23,7 @@ CleanTube is a lightweight, privacy-focused Chrome extension engineered to elimi
 
 1. Clone this repository or download the source code:
    ```bash
-   git clone https://github.com/your-username/cleantube.git
+   git clone https://github.com/harshimg/CleanTube.git
    ```
 2. Open Google Chrome and navigate to:
    ```text
