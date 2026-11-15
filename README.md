@@ -1,49 +1,52 @@
 # 🛡️ CleanTube — Ad Blocker for YouTube™ (Manifest V3)
 
-CleanTube is an open-source, lightweight Chrome extension engineered specifically to eliminate YouTube advertisements without telemetry tracking, data harvesting, or unnecessary permissions.
+CleanTube is a lightweight, privacy-focused Chrome extension engineered to eliminate YouTube advertisements without telemetry tracking, data harvesting, or unnecessary permissions.
 
 ---
 
 ## 🌟 Key Features
 
-### 1. Parity with Rival Extension ("Adblock for YouTube™")
-- **Pre-Roll, Mid-Roll, and Post-Roll Ad Blocking**: Fast-forwards and auto-skips video advertisements.
-- **Auto-Click "Skip Ad"**: Clicks skip buttons instantly when rendered.
-- **Cosmetic Filtering**: Strips banners, companion side-rail units, and homepage masthead promos.
-- **Embedded Player Support**: Compatible with embedded YouTube frames across external websites.
-- **Live Stream Compatibility**: Keeps live streams uninterrupted.
-- **Annotation & Card Removal**: Toggleable suppression of interactive end cards.
-
-### 2. Exclusive Enhancements (Beyond Rival)
-- 🔒 **Privacy-First Minimal Permissions**: Only requests `*.youtube.com` host permissions instead of dangerous `<all_urls>` wildcards.
-- ⚡ **Main World Interception (`injected.js`)**: Sanitizes `ytInitialPlayerResponse` and player fetch payloads to strip ad placements before video initialization.
-- 🎯 **Channel Whitelisting**: Allows selective whitelisting of your favorite creators to support them while keeping other channels ad-free.
-- 📊 **Real-time Statistics**: Tracks ads blocked today, total blocked count, and estimated watch time saved.
-- 🏷️ **Dynamic Badge Counter**: Displays current session block counts directly on the extension icon.
-- ⌨️ **Keyboard Shortcut**: Quick toggle via `Alt+Shift+B`.
-- ⚙️ **Full Options Dashboard**: Granular feature controls and JSON configuration backup/restore.
+- **Comprehensive Video Ad Blocking**: Fast-forwards and auto-skips pre-roll, mid-roll, and post-roll video advertisements.
+- **Instant Skip**: Automatically clicks modern YouTube "Skip Ad" buttons immediately upon rendering.
+- **Cosmetic Filtering**: Eliminates banners, sidebar companion ads, and feed layout gaps with zero black boxes.
+- **Main World Scriptlet Engine**: Sanitizes video response payloads before playback begins.
+- **Creator Whitelisting**: Selectively whitelist your favorite creators to support them while keeping the rest of YouTube ad-free.
+- **Live Statistics**: Displays real-time counts of blocked ads and estimated time saved.
+- **Dynamic Badge Counter**: Shows blocked ad counts directly on the toolbar icon.
+- **Privacy-First**: Zero analytics, zero data logging, and permissions strictly scoped to YouTube (`*.youtube.com`).
 
 ---
 
-## 🚀 How to Install & Load in Google Chrome
+## 🚀 How to Install
 
-1. Open Google Chrome and navigate to `chrome://extensions/`.
-2. Enable **Developer mode** via the toggle switch in the upper-right corner.
-3. Click the **Load unpacked** button.
-4. Select the `cleantube` directory:
+### Option A: From Source (Developer Mode)
+
+1. Clone this repository or download the source code:
+   ```bash
+   git clone https://github.com/your-username/cleantube.git
    ```
-   F:\My Creation\extensionDev\cleantube
+2. Open Google Chrome and navigate to:
+   ```text
+   chrome://extensions/
    ```
-5. CleanTube will appear in your extension list with its blue shield icon. Pin it to your toolbar for easy access.
+3. Enable **Developer mode** via the toggle switch in the upper-right corner.
+4. Click the **Load unpacked** button.
+5. Select the project folder containing `manifest.json`.
+6. CleanTube will appear in your extension list with its red shield icon. Pin it to your toolbar for easy access!
 
 ---
 
 ## 🧪 Testing & Validation
 
-Run the integrated automated test suite:
+Run the automated test suite locally:
 ```bash
-cd "F:\My Creation\extensionDev\cleantube"
 node tests/run-tests.js
 ```
-All 12 test assertions validate the manifest structure, network declarative rules, script hooks, and interface files.
+Validates the manifest structure, declarative net request rules, script hooks, and interface files.
 
+---
+
+## 📄 License & Privacy
+
+- **Privacy Policy**: CleanTube does not collect, transmit, or monetize any user data.
+- **Publisher**: Daarks (`daarks.com`)
