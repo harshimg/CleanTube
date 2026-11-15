@@ -1,18 +1,19 @@
 /* ==========================================================================
    CleanTube Cosmetic Filter Stylesheet
-   Precision element removal to eliminate ads, empty gaps, and black boxes
+   Precision element removal to eliminate ads, empty gaps, and black boxes.
+   Scoped to html:not(.cleantube-disabled) so toggling off restores all ads.
    ========================================================================== */
 
 /* 1. Eliminate Ad Grid Slots from Home/Feed (Removes the Black Box Gap) */
-ytd-rich-item-renderer:has(> #content > ytd-ad-slot-renderer),
-ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
-ytd-rich-item-renderer:has(ytd-display-ad-renderer),
-ytd-rich-item-renderer:has(ytd-in-feed-ad-layout-renderer),
-ytd-rich-item-renderer:has(ytd-rich-grid-media-ad-renderer),
-.ytd-rich-item-renderer:has(.ytd-ad-slot-renderer),
-.ytd-rich-item-renderer.style-scope > .ytd-rich-item-renderer > .ytd-ad-slot-renderer.style-scope,
-ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
-ytd-rich-section-renderer:has(ytd-banner-promo-renderer) {
+html:not(.cleantube-disabled) ytd-rich-item-renderer:has(> #content > ytd-ad-slot-renderer),
+html:not(.cleantube-disabled) ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+html:not(.cleantube-disabled) ytd-rich-item-renderer:has(ytd-display-ad-renderer),
+html:not(.cleantube-disabled) ytd-rich-item-renderer:has(ytd-in-feed-ad-layout-renderer),
+html:not(.cleantube-disabled) ytd-rich-item-renderer:has(ytd-rich-grid-media-ad-renderer),
+html:not(.cleantube-disabled) .ytd-rich-item-renderer:has(.ytd-ad-slot-renderer),
+html:not(.cleantube-disabled) .ytd-rich-item-renderer.style-scope > .ytd-rich-item-renderer > .ytd-ad-slot-renderer.style-scope,
+html:not(.cleantube-disabled) ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+html:not(.cleantube-disabled) ytd-rich-section-renderer:has(ytd-banner-promo-renderer) {
   display: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -25,67 +26,67 @@ ytd-rich-section-renderer:has(ytd-banner-promo-renderer) {
 }
 
 /* 2. Standalone Ad Units and Feed Slots */
-ytd-ad-slot-renderer,
-ytd-in-feed-ad-layout-renderer,
-ytd-display-ad-renderer,
-ytd-rich-grid-media-ad-renderer,
-ad-badge-view-model,
-.yt-badge-shape--ad,
-#fulfilled-ad-slot {
+html:not(.cleantube-disabled) ytd-ad-slot-renderer,
+html:not(.cleantube-disabled) ytd-in-feed-ad-layout-renderer,
+html:not(.cleantube-disabled) ytd-display-ad-renderer,
+html:not(.cleantube-disabled) ytd-rich-grid-media-ad-renderer,
+html:not(.cleantube-disabled) ad-badge-view-model,
+html:not(.cleantube-disabled) .yt-badge-shape--ad,
+html:not(.cleantube-disabled) #fulfilled-ad-slot {
   display: none !important;
 }
 
 /* 3. Companion & Sidebar Ads */
-ytd-companion-slot-renderer,
-#companion-ad-renderer,
-#player-ads,
-.ytd-watch-flexy > .ytd-watch-next-secondary-results-renderer > ytd-ad-slot-renderer.ytd-watch-next-secondary-results-renderer,
-.ytd-watch-flexy > ytd-merch-shelf-renderer > #main.ytd-merch-shelf-renderer,
-#offer-module,
-#sticker-layer,
-#promotion-shelf,
-ytd-promoted-sparkles-web-renderer,
-ytd-player-legacy-desktop-watch-ads-renderer {
+html:not(.cleantube-disabled) ytd-companion-slot-renderer,
+html:not(.cleantube-disabled) #companion-ad-renderer,
+html:not(.cleantube-disabled) #player-ads,
+html:not(.cleantube-disabled) .ytd-watch-flexy > .ytd-watch-next-secondary-results-renderer > ytd-ad-slot-renderer.ytd-watch-next-secondary-results-renderer,
+html:not(.cleantube-disabled) .ytd-watch-flexy > ytd-merch-shelf-renderer > #main.ytd-merch-shelf-renderer,
+html:not(.cleantube-disabled) #offer-module,
+html:not(.cleantube-disabled) #sticker-layer,
+html:not(.cleantube-disabled) #promotion-shelf,
+html:not(.cleantube-disabled) ytd-promoted-sparkles-web-renderer,
+html:not(.cleantube-disabled) ytd-player-legacy-desktop-watch-ads-renderer {
   display: none !important;
 }
 
 /* 4. Mastheads & In-Feed Promoted Banners */
-ytd-masthead-ad-renderer,
-#masthead-ad,
-.ytd-two-column-browse-results-renderer > ytd-rich-grid-renderer > #masthead-ad.ytd-rich-grid-renderer,
-.grid.ytd-browse > #primary > .style-scope > .ytd-rich-grid-renderer > .ytd-rich-grid-renderer > .ytd-ad-slot-renderer,
-ytd-banner-promo-renderer,
-ytd-statement-banner-renderer,
-ytd-primetime-promo-renderer,
-ytd-brand-video-singleton-renderer {
+html:not(.cleantube-disabled) ytd-masthead-ad-renderer,
+html:not(.cleantube-disabled) #masthead-ad,
+html:not(.cleantube-disabled) .ytd-two-column-browse-results-renderer > ytd-rich-grid-renderer > #masthead-ad.ytd-rich-grid-renderer,
+html:not(.cleantube-disabled) .grid.ytd-browse > #primary > .style-scope > .ytd-rich-grid-renderer > .ytd-rich-grid-renderer > .ytd-ad-slot-renderer,
+html:not(.cleantube-disabled) ytd-banner-promo-renderer,
+html:not(.cleantube-disabled) ytd-statement-banner-renderer,
+html:not(.cleantube-disabled) ytd-primetime-promo-renderer,
+html:not(.cleantube-disabled) ytd-brand-video-singleton-renderer {
   display: none !important;
 }
 
 /* 5. Player Video Overlays & Ad Text */
-.ytp-ad-overlay-container,
-.ytp-ad-image-overlay,
-.ytp-ad-text-overlay,
-.ytp-ad-player-overlay,
-.ytp-ad-player-overlay-flyout-cta,
-.ytp-ad-action-interstitial,
-.ytp-ad-feedback-dialog-background,
-.ytp-ad-message-container,
-.ytp-ad-player-overlay-layout__ad-info-container,
-.ytp-ad-persistent-progress-bar-container,
-.ytp-suggested-action > .ytp-suggested-action-badge,
-[class*="ytp-ad-badge"] {
+html:not(.cleantube-disabled) .ytp-ad-overlay-container,
+html:not(.cleantube-disabled) .ytp-ad-image-overlay,
+html:not(.cleantube-disabled) .ytp-ad-text-overlay,
+html:not(.cleantube-disabled) .ytp-ad-player-overlay,
+html:not(.cleantube-disabled) .ytp-ad-player-overlay-flyout-cta,
+html:not(.cleantube-disabled) .ytp-ad-action-interstitial,
+html:not(.cleantube-disabled) .ytp-ad-feedback-dialog-background,
+html:not(.cleantube-disabled) .ytp-ad-message-container,
+html:not(.cleantube-disabled) .ytp-ad-player-overlay-layout__ad-info-container,
+html:not(.cleantube-disabled) .ytp-ad-persistent-progress-bar-container,
+html:not(.cleantube-disabled) .ytp-suggested-action > .ytp-suggested-action-badge,
+html:not(.cleantube-disabled) [class*="ytp-ad-badge"] {
   display: none !important;
 }
 
 /* 6. Shorts Ads */
-#shorts-inner-container > .ytd-shorts:has(> .ytd-reel-video-renderer > ytd-ad-slot-renderer),
-.ytReelMetapanelViewModelHost > .ytReelMetapanelViewModelMetapanelItem > .ytShortsSuggestedActionViewModelStaticHost {
+html:not(.cleantube-disabled) #shorts-inner-container > .ytd-shorts:has(> .ytd-reel-video-renderer > ytd-ad-slot-renderer),
+html:not(.cleantube-disabled) .ytReelMetapanelViewModelHost > .ytReelMetapanelViewModelMetapanelItem > .ytShortsSuggestedActionViewModelStaticHost {
   display: none !important;
 }
 
 /* 7. Search Promoted Ads */
-.ytd-section-list-renderer > .ytd-item-section-renderer > ytd-search-pyv-renderer.ytd-item-section-renderer,
-ytd-search-pyv-renderer {
+html:not(.cleantube-disabled) .ytd-section-list-renderer > .ytd-item-section-renderer > ytd-search-pyv-renderer.ytd-item-section-renderer,
+html:not(.cleantube-disabled) ytd-search-pyv-renderer {
   display: none !important;
 }
 
@@ -97,9 +98,9 @@ body.cleantube-no-annotations .iv-drawer {
 }
 
 /* 9. Anti-Adblock Warning Overlay */
-tp-yt-paper-dialog:has(yt-playability-error-supported-renderers),
-ytd-enforcement-message-view-model,
-.yt-playability-error-supported-renderers {
+html:not(.cleantube-disabled) tp-yt-paper-dialog:has(yt-playability-error-supported-renderers),
+html:not(.cleantube-disabled) ytd-enforcement-message-view-model,
+html:not(.cleantube-disabled) .yt-playability-error-supported-renderers {
   display: none !important;
 }
 

@@ -34,8 +34,18 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     await chrome.storage.local.set(updates);
   }
 
+  const isEnabled = existing.isEnabled !== false;
+  await toggleDNRRules(isEnabled);
   chrome.alarms.create('dailyStatsReset', { periodInMinutes: 60 });
-  updateBadge(existing.isEnabled !== false ? (existing.stats?.blockedToday || 0) : null);
+  updateBadge(isEnabled ? (existing.stats?.blockedToday || 0) : null);
+});
+
+// Sync rules and badge on browser startup
+chrome.runtime.onStartup.addListener(async () => {
+  const data = await chrome.storage.local.get(['isEnabled', 'stats']);
+  const isEnabled = data.isEnabled !== false;
+  await toggleDNRRules(isEnabled);
+  updateBadge(isEnabled ? (data.stats?.blockedToday || 0) : null);
 });
 
 // Alarm listener for daily stats reset
@@ -125,6 +135,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         for (const tab of tabs) {
           chrome.tabs.sendMessage(tab.id, { action: 'stateChanged', isEnabled }).catch(() => {});
         }
+
+        if (message.reloadTabId) {
+          chrome.tabs.reload(message.reloadTabId).catch(() => {});
+        }
+
         sendResponse({ success: true, isEnabled });
         break;
       }
@@ -176,6 +191,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         for (const tab of tabs) {
           chrome.tabs.sendMessage(tab.id, { action: 'whitelistUpdated', whitelist }).catch(() => {});
         }
+
+        if (message.reloadTabId) {
+          chrome.tabs.reload(message.reloadTabId).catch(() => {});
+        }
+
         sendResponse({ success: true });
         break;
       }

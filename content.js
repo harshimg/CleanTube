@@ -22,8 +22,26 @@
   let observer = null;
   let adHandlingDebounce = false;
 
-  // 1. Main World injection is handled cleanly via chrome.scripting.executeScript (world: 'MAIN') in background.js
-  // (No manual <script src="chrome-extension://..."> tags needed, avoiding cross-origin frame warnings)
+  // 1. Sync disabled class with root html element so CSS filters turn ON/OFF instantly
+  function syncDisabledState() {
+    const shouldDisable = !isEnabled || isCurrentChannelWhitelisted();
+    if (shouldDisable) {
+      document.documentElement.classList.add('cleantube-disabled');
+    } else {
+      document.documentElement.classList.remove('cleantube-disabled');
+    }
+  }
+
+  // Early local storage sync
+  try {
+    chrome.storage.local.get(['isEnabled', 'whitelist'], (data) => {
+      if (data) {
+        if (data.isEnabled === false) isEnabled = false;
+        if (Array.isArray(data.whitelist)) whitelist = data.whitelist;
+        syncDisabledState();
+      }
+    });
+  } catch (e) {}
 
   // 2. Extract current channel name/handle if available
   function extractChannel() {
@@ -68,7 +86,10 @@
 
   // 4. Instant Fast-forward and auto-skip active video ads
   function handleVideoAds() {
-    if (!isEnabled || isCurrentChannelWhitelisted()) return;
+    if (!isEnabled || isCurrentChannelWhitelisted()) {
+      syncDisabledState();
+      return;
+    }
 
     purgeEmptyAdWrappers();
 
@@ -150,7 +171,9 @@
     if (observer) observer.disconnect();
 
     observer = new MutationObserver(() => {
-      handleVideoAds();
+      if (isEnabled && !isCurrentChannelWhitelisted()) {
+        handleVideoAds();
+      }
     });
 
     observer.observe(document.body || document.documentElement, {
@@ -161,7 +184,7 @@
     });
   }
 
-  // 7. Initialize and fetch background settings
+  // 8. Initialize and fetch background settings
   async function init() {
     try {
       const response = await chrome.runtime.sendMessage({ action: 'getGlobalState' });
@@ -172,20 +195,26 @@
       }
     } catch (e) {}
 
+    extractChannel();
+    syncDisabledState();
     applyAnnotationSetting();
     setupObserver();
-    handleVideoAds();
-    extractChannel();
+    if (isEnabled) handleVideoAds();
 
     // Hook YouTube SPA navigation events
     window.addEventListener('yt-navigate-finish', () => {
       extractChannel();
+      syncDisabledState();
       applyAnnotationSetting();
-      handleVideoAds();
+      if (isEnabled) handleVideoAds();
     });
 
     // High frequency interval (100ms) to ensure ZERO delay if an ad tries to render
-    setInterval(handleVideoAds, 100);
+    setInterval(() => {
+      if (isEnabled && !isCurrentChannelWhitelisted()) {
+        handleVideoAds();
+      }
+    }, 100);
   }
 
   // 9. Listen to background broadcast messages
@@ -193,22 +222,26 @@
     switch (message.action) {
       case 'stateChanged':
         isEnabled = message.isEnabled;
+        syncDisabledState();
         applyAnnotationSetting();
-        handleVideoAds();
+        if (isEnabled) handleVideoAds();
         sendResponse({ success: true });
         break;
 
       case 'settingsUpdated':
         settings = { ...settings, ...(message.settings || {}) };
+        syncDisabledState();
         applyAnnotationSetting();
-        handleVideoAds();
+        if (isEnabled) handleVideoAds();
         sendResponse({ success: true });
         break;
 
       case 'whitelistUpdated':
         whitelist = message.whitelist || [];
+        extractChannel();
+        syncDisabledState();
         applyAnnotationSetting();
-        handleVideoAds();
+        if (isEnabled) handleVideoAds();
         sendResponse({ success: true });
         break;
 

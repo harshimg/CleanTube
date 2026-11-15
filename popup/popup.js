@@ -108,7 +108,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       statusText.classList.add('paused');
     }
 
-    chrome.runtime.sendMessage({ action: 'toggleGlobal', isEnabled });
+    chrome.runtime.sendMessage({
+      action: 'toggleGlobal',
+      isEnabled,
+      reloadTabId: activeTabId
+    });
   });
 
   // 4. Handle whitelist toggle button
@@ -131,7 +135,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       whitelistBtn.classList.add('whitelisted');
     }
 
-    chrome.runtime.sendMessage({ action: 'updateWhitelist', whitelist });
+    chrome.runtime.sendMessage({
+      action: 'updateWhitelist',
+      whitelist,
+      reloadTabId: activeTabId
+    });
   });
 });
 
