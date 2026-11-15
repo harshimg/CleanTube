@@ -1,0 +1,18 @@
+{
+  "name": "cleantube",
+  "version": "1.0.0",
+  "description": "CleanTube — Lightweight ad blocker for YouTube",
+  "main": "background.js",
+  "scripts": {
+    "test": "node tests/run-tests.js"
+  },
+  "keywords": [
+    "youtube",
+    "adblock",
+    "chrome-extension",
+    "manifest-v3"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

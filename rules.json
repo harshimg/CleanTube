@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googleads.g.doubleclick.net",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "sub_frame", "media", "ping"]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||doubleclick.net",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "sub_frame", "media", "ping"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googleadservices.com",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "sub_frame", "ping"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googlesyndication.com",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "sub_frame"]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||s0.2mdn.net",
+      "resourceTypes": ["script", "image", "xmlhttprequest", "sub_frame", "media"]
+    }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "^https?://([^/]+\\.)?youtube\\.com/pagead/",
+      "resourceTypes": ["script", "xmlhttprequest", "sub_frame"]
+    }
+  },
+  {
+    "id": 7,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "^https?://([^/]+\\.)?youtube\\.com/youtubei/v1/player/ad_break",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "^https?://([^/]+\\.)?youtube\\.com/get_midroll_",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "^https?://([^/]+\\.)?youtube\\.com/get_video_info\\?.*adunit",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "action": { "type": "block" },
+    "condition": {
+      "urlFilter": "||googlevideo.com/initplayback?*&oad=",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  }
+]

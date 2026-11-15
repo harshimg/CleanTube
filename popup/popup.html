@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>CleanTube</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <img src="../icons/icon-32.png" alt="CleanTube Shield Logo" class="logo" width="24" height="24">
+        <div class="brand-text">
+          <h1>CleanTube</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+      <a href="../options/options.html" target="_blank" class="settings-link" title="Open Settings" aria-label="Open Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Master Switch Card -->
+    <div class="card master-card">
+      <div class="master-info">
+        <label for="global-toggle" class="master-title">Ad Blocking</label>
+        <span id="status-text" class="master-status" aria-live="polite">Active & Protecting</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="global-toggle" switch role="switch" aria-checked="true" checked>
+        <span class="slider" aria-hidden="true"></span>
+      </label>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span id="blocked-today" class="stat-value" aria-live="polite">0</span>
+        <span class="stat-label">Blocked Today</span>
+      </div>
+      <div class="stat-card">
+        <span id="blocked-total" class="stat-value" aria-live="polite">0</span>
+        <span class="stat-label">Total Blocked</span>
+      </div>
+    </div>
+
+    <div class="card time-card">
+      <div class="time-icon" aria-hidden="true">⚡</div>
+      <div class="time-info">
+        <span id="time-saved" class="time-value" aria-live="polite">0m</span>
+        <span class="time-label">Estimated Time Saved</span>
+      </div>
+    </div>
+
+    <!-- Whitelist Channel Context -->
+    <div class="card whitelist-card" id="channel-card">
+      <div class="channel-info">
+        <span class="channel-label">Current Channel</span>
+        <span id="channel-name" class="channel-handle">Not on YouTube</span>
+      </div>
+      <button id="whitelist-btn" class="btn-whitelist" disabled aria-label="Toggle whitelist for this channel">Whitelist</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Minimal & Open Source</span>
+      <span class="separator" aria-hidden="true">•</span>
+      <a href="../options/options.html" target="_blank">Preferences</a>
+    </footer>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

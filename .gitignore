@@ -1,0 +1,43 @@
+# Operating System Files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor & IDE Directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Chrome / Browser Temporary & Metadata Files
+# Chrome creates _metadata when packing or compiling rulesets locally; do not commit this
+_metadata/
+*.crx
+*.pem
+
+# Dependencies & Build Artefacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Agent & AI Tooling Scratch/Internal States
+.agents/
+skills-lock.json
+
+# Local Archives and Backups
+*.zip
+*.tar.gz
+*.tgz
+cleantube-backup-*.json

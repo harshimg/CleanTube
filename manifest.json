@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "CleanTube — Ad Blocker for YouTube™",
+  "short_name": "CleanTube",
+  "version": "1.0.0",
+  "description": "CleanTube is a fast, lightweight ad blocker for YouTube™. Blocks preroll video ads, banners, popups, and intrusive interruptions.",
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "storage",
+    "activeTab",
+    "alarms",
+    "scripting",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://*.youtube-nocookie.com/*"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_ads",
+        "enabled": true,
+        "path": "rules.json"
+      },
+      {
+        "id": "ruleset_tracking",
+        "enabled": true,
+        "path": "rules-tracking.json"
+      }
+    ]
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.youtube-nocookie.com/*"
+      ],
+      "css": ["cosmetic.css"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["injected.js"],
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.youtube-nocookie.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_title": "CleanTube — Ad Blocker for YouTube™",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "commands": {
+    "toggle-blocking": {
+      "suggested_key": {
+        "default": "Alt+Shift+B"
+      },
+      "description": "Toggle ad blocking on/off"
+    }
+  }
+}

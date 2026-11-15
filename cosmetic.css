@@ -1,0 +1,108 @@
+/* ==========================================================================
+   CleanTube Cosmetic Filter Stylesheet
+   Precision element removal to eliminate ads, empty gaps, and black boxes
+   ========================================================================== */
+
+/* 1. Eliminate Ad Grid Slots from Home/Feed (Removes the Black Box Gap) */
+ytd-rich-item-renderer:has(> #content > ytd-ad-slot-renderer),
+ytd-rich-item-renderer:has(ytd-ad-slot-renderer),
+ytd-rich-item-renderer:has(ytd-display-ad-renderer),
+ytd-rich-item-renderer:has(ytd-in-feed-ad-layout-renderer),
+ytd-rich-item-renderer:has(ytd-rich-grid-media-ad-renderer),
+.ytd-rich-item-renderer:has(.ytd-ad-slot-renderer),
+.ytd-rich-item-renderer.style-scope > .ytd-rich-item-renderer > .ytd-ad-slot-renderer.style-scope,
+ytd-rich-section-renderer:has(ytd-statement-banner-renderer),
+ytd-rich-section-renderer:has(ytd-banner-promo-renderer) {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* 2. Standalone Ad Units and Feed Slots */
+ytd-ad-slot-renderer,
+ytd-in-feed-ad-layout-renderer,
+ytd-display-ad-renderer,
+ytd-rich-grid-media-ad-renderer,
+ad-badge-view-model,
+.yt-badge-shape--ad,
+#fulfilled-ad-slot {
+  display: none !important;
+}
+
+/* 3. Companion & Sidebar Ads */
+ytd-companion-slot-renderer,
+#companion-ad-renderer,
+#player-ads,
+.ytd-watch-flexy > .ytd-watch-next-secondary-results-renderer > ytd-ad-slot-renderer.ytd-watch-next-secondary-results-renderer,
+.ytd-watch-flexy > ytd-merch-shelf-renderer > #main.ytd-merch-shelf-renderer,
+#offer-module,
+#sticker-layer,
+#promotion-shelf,
+ytd-promoted-sparkles-web-renderer,
+ytd-player-legacy-desktop-watch-ads-renderer {
+  display: none !important;
+}
+
+/* 4. Mastheads & In-Feed Promoted Banners */
+ytd-masthead-ad-renderer,
+#masthead-ad,
+.ytd-two-column-browse-results-renderer > ytd-rich-grid-renderer > #masthead-ad.ytd-rich-grid-renderer,
+.grid.ytd-browse > #primary > .style-scope > .ytd-rich-grid-renderer > .ytd-rich-grid-renderer > .ytd-ad-slot-renderer,
+ytd-banner-promo-renderer,
+ytd-statement-banner-renderer,
+ytd-primetime-promo-renderer,
+ytd-brand-video-singleton-renderer {
+  display: none !important;
+}
+
+/* 5. Player Video Overlays & Ad Text */
+.ytp-ad-overlay-container,
+.ytp-ad-image-overlay,
+.ytp-ad-text-overlay,
+.ytp-ad-player-overlay,
+.ytp-ad-player-overlay-flyout-cta,
+.ytp-ad-action-interstitial,
+.ytp-ad-feedback-dialog-background,
+.ytp-ad-message-container,
+.ytp-ad-player-overlay-layout__ad-info-container,
+.ytp-ad-persistent-progress-bar-container,
+.ytp-suggested-action > .ytp-suggested-action-badge,
+[class*="ytp-ad-badge"] {
+  display: none !important;
+}
+
+/* 6. Shorts Ads */
+#shorts-inner-container > .ytd-shorts:has(> .ytd-reel-video-renderer > ytd-ad-slot-renderer),
+.ytReelMetapanelViewModelHost > .ytReelMetapanelViewModelMetapanelItem > .ytShortsSuggestedActionViewModelStaticHost {
+  display: none !important;
+}
+
+/* 7. Search Promoted Ads */
+.ytd-section-list-renderer > .ytd-item-section-renderer > ytd-search-pyv-renderer.ytd-item-section-renderer,
+ytd-search-pyv-renderer {
+  display: none !important;
+}
+
+/* 8. Annotations, Teasers, and Info Cards */
+body.cleantube-no-annotations .ytp-ce-element,
+body.cleantube-no-annotations .ytp-cards-teaser,
+body.cleantube-no-annotations .iv-drawer {
+  display: none !important;
+}
+
+/* 9. Anti-Adblock Warning Overlay */
+tp-yt-paper-dialog:has(yt-playability-error-supported-renderers),
+ytd-enforcement-message-view-model,
+.yt-playability-error-supported-renderers {
+  display: none !important;
+}
+
+body.cleantube-unlocked {
+  overflow: auto !important;
+}

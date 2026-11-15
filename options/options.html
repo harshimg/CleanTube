@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>CleanTube — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="settings-container">
+    <!-- Header -->
+    <header class="settings-header">
+      <div class="brand">
+        <img src="../icons/icon-48.png" alt="CleanTube Shield Logo" class="logo" width="44" height="44">
+        <div>
+          <h1>CleanTube Settings</h1>
+          <p class="subtitle">Customize blocking preferences, channel exceptions, and manage your data.</p>
+        </div>
+      </div>
+      <div class="badge">Manifest V3 Compliant</div>
+    </header>
+
+    <!-- Section 1: Blocking Preferences -->
+    <section class="section" aria-labelledby="sec-blocking-title">
+      <h2 id="sec-blocking-title" class="section-title">Blocking Preferences</h2>
+      <div class="card">
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-video-ads" class="setting-name">Video Ads (Pre-roll, Mid-roll, Post-roll)</label>
+            <span class="setting-desc">Fast-forward and auto-skip all commercial interruptions in the player</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-video-ads" switch role="switch" aria-checked="true" checked disabled>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-auto-skip" class="setting-name">Auto-Skip "Skip Ad" Button</label>
+            <span class="setting-desc">Automatically click skip buttons the millisecond they appear</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-auto-skip" switch role="switch" aria-checked="true" checked>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-overlays" class="setting-name">In-Video Overlay & Banner Ads</label>
+            <span class="setting-desc">Remove banner ads, image overlays, and bottom teaser rectangles</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-overlays" switch role="switch" aria-checked="true" checked>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-companion" class="setting-name">Companion & Sidebar Ads</label>
+            <span class="setting-desc">Hide promotional cards and top ads rendered above video recommendations</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-companion" switch role="switch" aria-checked="true" checked>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-infeed" class="setting-name">Homepage & In-Feed Promoted Content</label>
+            <span class="setting-desc">Filter out sponsored video tiles and masthead banners in your YouTube feeds</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-infeed" switch role="switch" aria-checked="true" checked>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <label for="pref-annotations" class="setting-name">Video Annotations & Cards</label>
+            <span class="setting-desc">Suppress interactive end-screen cards, teasers, and channel overlays</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="pref-annotations" switch role="switch" aria-checked="true" checked>
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Whitelisted Channels -->
+    <section class="section" aria-labelledby="sec-whitelist-title">
+      <h2 id="sec-whitelist-title" class="section-title">Whitelisted Channels</h2>
+      <div class="card">
+        <p class="section-desc">Channels listed below will not have ads blocked so you can support your favorite creators.</p>
+        
+        <div class="whitelist-input-row">
+          <input type="text" id="whitelist-input" placeholder="e.g. @Veritasium or @Fireship" autocomplete="off" aria-label="YouTube channel handle or URL">
+          <button id="add-whitelist-btn" class="btn btn-primary">Add Channel</button>
+        </div>
+
+        <div id="whitelist-container" class="whitelist-tags" aria-live="polite">
+          <!-- Dynamic tags inserted here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Data & Storage -->
+    <section class="section" aria-labelledby="sec-data-title">
+      <h2 id="sec-data-title" class="section-title">Data Management</h2>
+      <div class="card">
+        <div class="action-grid">
+          <div class="action-box">
+            <h4>Export Settings</h4>
+            <p>Save your configuration, statistics, and whitelist as a JSON file backup.</p>
+            <button id="export-btn" class="btn btn-secondary">Export JSON</button>
+          </div>
+          <div class="action-box">
+            <h4>Import Settings</h4>
+            <p>Restore settings or whitelists from an exported CleanTube backup file.</p>
+            <label class="btn btn-secondary file-label" tabindex="0" role="button" aria-label="Import Settings JSON file">
+              Import JSON
+              <input type="file" id="import-file" accept=".json" style="display: none;">
+            </label>
+          </div>
+          <div class="action-box">
+            <h4>Reset Statistics</h4>
+            <p>Reset today's and all-time ad counters and time saved calculation to zero.</p>
+            <button id="reset-stats-btn" class="btn btn-warning">Reset Stats</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: About & Privacy -->
+    <section class="section" aria-labelledby="sec-about-title">
+      <h2 id="sec-about-title" class="section-title">About CleanTube</h2>
+      <div class="card about-card">
+        <div class="about-info">
+          <p><strong>CleanTube</strong> is a privacy-first, minimal YouTube ad blocker designed to protect your viewing experience with zero bloated trackers and minimal host permissions.</p>
+          <ul class="about-list">
+            <li>🔒 <strong>No data collection:</strong> We do not collect, transmit, or monetize your viewing habits.</li>
+            <li>⚡ <strong>Lightweight:</strong> Powered by Manifest V3 declarativeNetRequest and CSS acceleration.</li>
+            <li>🎯 <strong>Targeted permissions:</strong> Only requests permission for <code>*.youtube.com</code>.</li>
+          </ul>
+        </div>
+        <div class="footer-meta">
+          <span>Version 1.0.0</span>
+          <span aria-hidden="true">•</span>
+          <span>Licensed under MIT</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>
+
