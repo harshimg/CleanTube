@@ -56,6 +56,15 @@ Validates the manifest structure, declarative net request rules, script hooks, a
 
 ---
 
+## 🌐 Open Source & Community
+
+CleanTube is 100% free, privacy-first, and open source:
+- **Source Code**: [https://github.com/harshimg/CleanTube](https://github.com/harshimg/CleanTube)
+- **Zero Tracking**: No telemetry, no third-party scripts, and no analytics.
+- **Auditable**: Anyone can review and inspect the codebase directly on GitHub.
+
+---
+
 ## 📄 License & Privacy
 
 - **Privacy Policy**: CleanTube does not collect, transmit, or monetize any user data.

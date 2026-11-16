@@ -48,7 +48,11 @@ Unlike generic ad blockers that demand access to read and change your personal d
 ✓ How It Works:
 CleanTube combines Manifest V3 declarativeNetRequest rules with client-side player response sanitization. Ad network calls (Doubleclick, GoogleAdServices) and ad placement configurations are pruned before the video player initializes. No black loading screens, no 5-second countdowns, and no anti-adblock detection warnings.
 
-✓ Lightweight & 100% Free:
+✓ 100% Free & Open Source:
+CleanTube is completely free and open source. Our code is transparent, tracker-free, and independently auditable by the community.
+GitHub Repository: https://github.com/harshimg/CleanTube
+
+✓ Lightweight & Built for Performance:
 Free to download and use. Built with modern Manifest V3 standards for maximum speed, minimal battery draw, and zero memory bloat.
 
 --------------------------------------------------

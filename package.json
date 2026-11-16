@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "CleanTube — Lightweight ad blocker for YouTube",
   "main": "background.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harshimg/CleanTube.git"
+  },
+  "homepage": "https://github.com/harshimg/CleanTube",
   "scripts": {
     "test": "node tests/run-tests.js"
   },
@@ -10,9 +15,10 @@
     "youtube",
     "adblock",
     "chrome-extension",
-    "manifest-v3"
+    "manifest-v3",
+    "open-source"
   ],
-  "author": "",
+  "author": "Daarks",
   "license": "MIT"
 }
 
