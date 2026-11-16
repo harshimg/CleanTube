@@ -19,7 +19,17 @@ CleanTube is a lightweight, privacy-focused Chrome extension engineered to elimi
 
 ## 🚀 How to Install
 
-### Option A: From Source (Developer Mode)
+### Option 1: Chrome Web Store (Recommended)
+
+Get CleanTube directly on Google Chrome with automatic updates:
+
+[![Available in the Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Install_CleanTube-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://noink.ink/cleantube)
+
+👉 **Direct Link**: [https://noink.ink/cleantube](https://noink.ink/cleantube)
+
+---
+
+### Option 2: From Source (Developer Mode)
 
 1. Clone this repository or download the source code:
    ```bash
@@ -27,11 +37,11 @@ CleanTube is a lightweight, privacy-focused Chrome extension engineered to elimi
    ```
 2. Open Google Chrome and navigate to:
    ```text
-   https://chromewebstore.google.com/detail/hepmanjoeebplddhamgjafgigncjfblc?utm_source=item-share-cb
+   chrome://extensions/
    ```
 3. Enable **Developer mode** via the toggle switch in the upper-right corner.
 4. Click the **Load unpacked** button.
-5. Select the project folder containing `manifest.json`.
+5. Select the `projects/cleantube` directory containing `manifest.json`.
 6. CleanTube will appear in your extension list with its red shield icon. Pin it to your toolbar for easy access!
 
 ---
