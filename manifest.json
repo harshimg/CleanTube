@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "CleanTube — Ad Blocker for YouTube™",
   "short_name": "CleanTube",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CleanTube is a fast, lightweight ad blocker for YouTube™. Blocks preroll video ads, banners, popups, and intrusive interruptions.",
   "permissions": [
     "declarativeNetRequest",

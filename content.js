@@ -1,7 +1,8 @@
 /**
  * CleanTube - Content Script
  * Runs in YouTube tabs (Isolated World).
- * Auto-skips ads, manages DOM mutations, removes empty wrappers, and reports stats.
+ * Auto-skips ads, manages video player states, and reports stats.
+ * Precision-scoped strictly to the video player to guarantee ZERO interference with search, navigation, or typing.
  */
 
 (function () {
@@ -64,44 +65,27 @@
     return whitelist.includes(currentChannel);
   }
 
-  // 3. Purge empty ad wrappers to guarantee NO black boxes in feeds
-  function purgeEmptyAdWrappers() {
-    if (!isEnabled || isCurrentChannelWhitelisted()) return;
-
-    // Rich grid media item placeholders
-    const adWrappers = document.querySelectorAll(
-      'ytd-rich-item-renderer:has(ytd-ad-slot-renderer), ' +
-      'ytd-rich-item-renderer:has(ytd-display-ad-renderer), ' +
-      'ytd-rich-item-renderer:has(ytd-in-feed-ad-layout-renderer), ' +
-      'ytd-rich-item-renderer:has(ytd-rich-grid-media-ad-renderer)'
-    );
-
-    for (let i = 0; i < adWrappers.length; i++) {
-      const el = adWrappers[i];
-      if (el.style.display !== 'none') {
-        el.style.setProperty('display', 'none', 'important');
-      }
-    }
-  }
-
-  // 4. Instant Fast-forward and auto-skip active video ads
+  // 3. Fast-forward and auto-skip active video ads (strictly scoped to video player)
   function handleVideoAds() {
     if (!isEnabled || isCurrentChannelWhitelisted()) {
       syncDisabledState();
       return;
     }
 
-    purgeEmptyAdWrappers();
-
+    // Only run when a video player is actually present on page
     const moviePlayer = document.querySelector('#movie_player, .html5-video-player');
-    const isAdShowing = moviePlayer && (
-      moviePlayer.classList.contains('ad-showing') ||
-      moviePlayer.classList.contains('ad-interrupting')
-    );
+    if (!moviePlayer) return;
 
-    const video = document.querySelector('video.html5-main-video') || document.querySelector('video');
+    // Check if an ad is actively playing or interrupting
+    const isAdShowing = moviePlayer.classList.contains('ad-showing') ||
+                        moviePlayer.classList.contains('ad-interrupting');
 
-    if (isAdShowing && video) {
+    // If NO ad is actively showing, DO NOT TOUCH ANYTHING (prevents interfering with search/UI)
+    if (!isAdShowing) return;
+
+    const video = moviePlayer.querySelector('video.html5-main-video') || moviePlayer.querySelector('video');
+
+    if (video) {
       // Instantly mute ad
       video.muted = true;
 
@@ -125,11 +109,11 @@
       }
     }
 
-    // Auto-click all modern YouTube skip button variants
+    // Auto-click modern YouTube skip buttons STRICTLY inside the video player
     if (settings.autoSkip) {
-      const skipButtons = document.querySelectorAll(
+      const skipButtons = moviePlayer.querySelectorAll(
         '.ytp-ad-skip-button, .ytp-ad-skip-button-modern, .ytp-skip-ad-button, .ytp-ad-skip-button-text, ' +
-        'button[aria-label*="Skip"], .ytp-ad-player-overlay-layout__skip-or-preview-container button'
+        '.ytp-ad-player-overlay-layout__skip-or-preview-container button'
       );
       for (let i = 0; i < skipButtons.length; i++) {
         const btn = skipButtons[i];
@@ -143,7 +127,7 @@
     handleAntiAdblockPopup();
   }
 
-  // 5. Handle YouTube's anti-adblock popup dialog
+  // 4. Handle YouTube's anti-adblock popup dialog
   function handleAntiAdblockPopup() {
     const dialog = document.querySelector('tp-yt-paper-dialog:has(yt-playability-error-supported-renderers), ytd-enforcement-message-view-model');
     if (dialog) {
@@ -157,7 +141,7 @@
     }
   }
 
-  // 6. Update annotations visibility class
+  // 5. Update annotations visibility class
   function applyAnnotationSetting() {
     if (settings.blockAnnotations && isEnabled && !isCurrentChannelWhitelisted()) {
       document.body.classList.add('cleantube-no-annotations');
@@ -166,25 +150,41 @@
     }
   }
 
-  // 7. Setup DOM MutationObserver
+  // 6. Setup DOM MutationObserver - target the player directly, never search or body inputs
   function setupObserver() {
     if (observer) observer.disconnect();
 
-    observer = new MutationObserver(() => {
-      if (isEnabled && !isCurrentChannelWhitelisted()) {
-        handleVideoAds();
+    const moviePlayer = document.querySelector('#movie_player');
+    if (moviePlayer) {
+      // Focus strictly on player class changes (ad-showing / ad-interrupting)
+      observer = new MutationObserver(() => {
+        if (isEnabled && !isCurrentChannelWhitelisted()) {
+          handleVideoAds();
+        }
+      });
+      observer.observe(moviePlayer, {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    } else {
+      // If player not rendered yet, wait for it via lightweight childList observer on #ytd-player or main container
+      observer = new MutationObserver(() => {
+        if (document.querySelector('#movie_player')) {
+          setupObserver();
+          handleVideoAds();
+        }
+      });
+      const container = document.querySelector('ytd-page-manager') || document.body;
+      if (container) {
+        observer.observe(container, {
+          childList: true,
+          subtree: false // Shallow observation only, zero performance impact!
+        });
       }
-    });
-
-    observer.observe(document.body || document.documentElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class']
-    });
+    }
   }
 
-  // 8. Initialize and fetch background settings
+  // 7. Initialize and fetch background settings
   async function init() {
     try {
       const response = await chrome.runtime.sendMessage({ action: 'getGlobalState' });
@@ -206,18 +206,19 @@
       extractChannel();
       syncDisabledState();
       applyAnnotationSetting();
+      setupObserver();
       if (isEnabled) handleVideoAds();
     });
 
-    // High frequency interval (100ms) to ensure ZERO delay if an ad tries to render
+    // Gentle polling interval (250ms) - only checks when video player is present
     setInterval(() => {
       if (isEnabled && !isCurrentChannelWhitelisted()) {
         handleVideoAds();
       }
-    }, 100);
+    }, 250);
   }
 
-  // 9. Listen to background broadcast messages
+  // 8. Listen to background broadcast messages
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
       case 'stateChanged':

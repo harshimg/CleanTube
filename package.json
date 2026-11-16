@@ -1,6 +1,6 @@
 {
   "name": "cleantube",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CleanTube — Lightweight ad blocker for YouTube",
   "main": "background.js",
   "repository": {
