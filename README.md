@@ -27,7 +27,7 @@ CleanTube is a lightweight, privacy-focused Chrome extension engineered to elimi
    ```
 2. Open Google Chrome and navigate to:
    ```text
-   chrome://extensions/
+   https://chromewebstore.google.com/detail/hepmanjoeebplddhamgjafgigncjfblc?utm_source=item-share-cb
    ```
 3. Enable **Developer mode** via the toggle switch in the upper-right corner.
 4. Click the **Load unpacked** button.
