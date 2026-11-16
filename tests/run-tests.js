@@ -34,7 +34,7 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 it('manifest exists and has manifest_version 3', () => {
   assert.strictEqual(manifest.manifest_version, 3);
   assert.strictEqual(manifest.name, 'CleanTube — Ad Blocker for YouTube™');
-  assert.strictEqual(manifest.version, '1.0.0');
+  assert.strictEqual(manifest.version, '1.0.1');
 });
 
 it('requests only minimal scoped permissions (no <all_urls>)', () => {
